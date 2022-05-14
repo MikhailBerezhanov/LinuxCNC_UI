@@ -1,0 +1,193 @@
+
+
+* {
+  margin: 0px; 
+  padding: 0px; 
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  background-color: #060606; 
+  font-size: 14px;
+}
+
+/*---------------------------------------------*/
+input {
+  outline: none;
+  border: none;
+}
+
+textarea {
+  outline: none;
+  border: none;
+}
+
+textarea:focus, input:focus {
+  border-color: transparent !important;
+}
+/*
+::placeholder { color: #999999; }   
+::-webkit-input-placeholder { color: #999999; }
+:-ms-input-placeholder {  color: #999999; } 
+::-ms-input-placeholder { color: #999999; }   
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; }
+input:focus::-moz-placeholder { color:transparent; }
+input:focus:-ms-input-placeholder { color:transparent; }
+
+textarea:focus::-webkit-input-placeholder { color:transparent; }
+textarea:focus:-moz-placeholder { color:transparent; }
+textarea:focus::-moz-placeholder { color:transparent; }
+textarea:focus:-ms-input-placeholder { color:transparent; }
+
+textarea::-webkit-input-placeholder { color: #555555;}
+textarea:-moz-placeholder { color: #555555;}
+textarea::-moz-placeholder { color: #555555;}
+textarea:-ms-input-placeholder { color: #555555;}
+*/
+label {
+  margin: 0;
+  display: block;
+}
+
+/*---------------------------------------------*/
+button {
+  outline: none !important;
+  border: none;
+  background: transparent;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+iframe {
+  border: none !important;
+}
+
+option:hover {
+  background: var(--navi_btn-select-color); /*olive linear-gradient(olive, olive);*/
+}
+
+option:checked {
+  background: var(--navi_btn-color) linear-gradient(var(--navi_btn-color), var(--navi_btn-color)); /*olive linear-gradient(olive, olive);*/
+  /*color: blue;*/
+}
+
+/*-------------- Common Interface's elements' colors --------------*/
+
+:root {
+  /* Elements' colors */
+  --navi_btn-color: hsla(94, 60%, 26%, 1); /* #3e6c1b; */
+  --navi_btn-select-color: hsla(94, 63%, 41%, 1); /* #61AC27; */
+
+  --ctrl_btn-color: hsla(94, 60%, 26%, 1); 
+  --ctrl_btn-select-color: hsla(94, 63%, 41%, 1); 
+
+  --header-line-text-color: hsla(0, 0%, 91%, 1);
+  --header-btn-text-color: hsla(0, 0%, 91%, 1);
+  --header-bright-side-color: hsla(94, 63%, 41%, 1); /*rgba(255,255,99,0.50);*/
+  --header-dull-side-color: hsla(0, 0%, 33%, 1);
+
+  --ok_btn-color: hsla(94, 69%, 50%, 1); /* #73D627 */
+  --err_btn-color: hsla(5, 60%, 43%, 1); /* #af372c */
+ 
+  --cell-title-color: hsla(0, 0%, 10%, 1);  /* #191919 */
+  --mainmenu-btn-color: hsla(0, 0%, 16%, 1); /* rgba(85, 85, 85, 0.55) */
+  --mainmenu-safe-color: hsla(129, 82%, 37%, 1); /* #11ac27 */
+  --mainmenu-alarm-color: red;    /*  */
+  --mainmenu-blue-color: blue;
+
+  --switch-bg-color: hsla(0, 0%, 13%, 1);
+  --switch-color: hsla(0, 0%, 80%, 1);
+
+  /* Texts' colors */
+  --navi_btn-text-color: hsla(0, 0%, 91%, 1);
+  --ctrl_btn-text-color: hsla(0, 0%, 91%, 1);
+  --title-text-color: hsla(0, 0%, 91%, 1);
+  --helper-text-color: hsla(0, 0%, 91%, 1);
+  --cell_name-text-color: hsla(0, 0%, 91%, 1);
+  --mainmenu-btn-text-color: hsla(0, 0%, 91%, 1);
+  --mainmenu-btn-state-color: hsla(0, 0%, 91%, 1);
+  --mainmenu-btn-sub-state-color: hsla(0, 0%, 91%, 1);
+  --footer-text-color: hsla(0, 0%, 91%, 1);
+  --ok_btn-text-color: hsla(0, 0%, 91%, 1);
+  --err_btn-text-color: hsla(0, 0%, 91%, 1);
+
+  --placeholder-text-color: hsla(0, 0%, 60%, 1);
+  --placeholder-font-family: Verdana, Geneva, sans-serif;
+  --placeholder-font-size: 1.2rem;
+
+  --cell-label-text-color: hsla(0, 0%, 60%, 1);
+}
+
+/* Common */
+.input-text{
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1.2rem;
+  color: var(--cell_name-text-color);
+  line-height: 1.2;
+}
+
+/* [ Login ] */
+.login-title-text{
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1.4rem;
+  color: var(--title-text-color);
+  line-height: 1.2;
+} 
+
+/* [ Control and navigation buttons ] */
+.navigation-btn-text{
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1.3rem;
+  color: var(--navi_btn-text-color);
+  line-height: 1.2;
+}
+
+.ctrl-btn-text{
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 0.85rem;
+  color: var(--ctrl_btn-text-color);
+  line-height: 1.2;
+}
+
+.my-body{
+  width: 100%;  
+  /*min-height: 100vh;*/
+  height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+  
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+ 
+  position: relative;
+  z-index: 1;
+
+  //background-image: url('img/patern.png');
+  background-repeat: ;
+  background-position: center;
+  background-size: 30%; 
+  background-color: rgba(0, 0, 0, 0.7);
+
+  justify-content: center;
+  align-items: center;
+}
+
+/*----------------------------------------------
+[ Media ] 
+
+/* [ Modern Smartphones ] */
+@media screen and (max-device-width:1024px) and (max-device-height:1880px)
+{
+  /* Common */
+  .my-body{background-size: 60%;}
+  
+}

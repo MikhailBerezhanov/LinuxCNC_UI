@@ -1,0 +1,83 @@
+
+{% extends cnc_template.html %}
+
+{% block custom_header %}
+  <link rel="stylesheet" href="static/cnc_login.css"> 
+  <link rel="stylesheet" href="static/cnc_navi.css">
+  <link rel="stylesheet" href="static/cnc_common.css">
+  <script type="module">
+    
+    import { 
+      cnc_login,
+    } from './static/js/cnc_api.module.js'
+
+    function login_request(event)
+    {
+      let info = {};
+      info.user_name = document.getElementById("user_name").value;
+      info.password = document.getElementById("password").value;
+
+      if(info.user_name === ""){
+        alert("Пожалуйста заполните поле User name");
+        return;
+      }
+
+      if(info.password === ""){
+        alert("Пожалуйста заполните поле Password");
+        return;
+      }
+
+      cnc_login(info,
+                (json) => { document.location.href = "cnc_main.html" },
+                (json) => { 
+                  switch(json.result.code){
+                    case -1:
+                      alert("Пользователь " + info.user_name + " не найден");
+                      break;
+                    case -2:
+                      alert("Неверный пароль");
+                      break;
+                    default:
+                      alert("Ошибка проверки пользователя (" + json.result.code + "): " + json.result.text);
+                  } 
+                }
+      );
+    }
+
+    document.getElementById("login").addEventListener("click", login_request);
+    window.onkeypress = function(event) {
+      if(event.code == "Enter") login_request(event);
+    }
+
+  </script>
+{% end %}
+
+{% block custom_body %}
+<div class="my-body" style="padding: 25px;">
+  <h1 class="header-startup">LinuxCNC</h1>
+
+  <div class="wrap-login">
+    <span class="login-form-title login-title-text settings-btn-color">
+      <b>Вход в систему</b>
+    </span>
+
+    <div class="login-form" >
+
+      <div class="wrap-input">
+        <input id= "user_name" class="input" type="text" name="username" placeholder="User name" autocomplete="off" autofocus required>
+        </div>
+        
+      <div class="wrap-input">
+        <input id="password" class="input" type="password" name="password" placeholder="Password" autocomplete="off" required>  
+      </div>
+
+      <div class="container-login-form-btn">
+        <button id="login" class="ctrl-button login-form-btn ctrl-btn-text ctrl-btn-color" >
+          Войти
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% end %}

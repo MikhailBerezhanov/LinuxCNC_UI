@@ -1,0 +1,12 @@
+*.pyc
+cnc_ini/*.var
+cnc_ini/*.bak
+cnc_ini/*.txt
+*.db
+*.log
+log/*
+templates/gb_*
+static/examples/*
+static/gcodes/*
+build/*
+img/

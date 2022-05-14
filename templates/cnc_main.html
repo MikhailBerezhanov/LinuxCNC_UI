@@ -1,0 +1,210 @@
+
+{% extends cnc_template.html %}
+
+{% block custom_header %}
+  <link rel="stylesheet" href="static/cnc_main.css">
+
+  <script type="module">
+
+    import { 
+      init_plot,
+      init_state_controls,
+      init_cnc_status_listener, 
+      init_cnc_errors_listener,
+    } from './static/js/cnc_main.js'
+
+    init_state_controls();
+    init_cnc_status_listener();
+    init_cnc_errors_listener();
+    init_plot();
+
+  </script>
+{% end %}
+
+{% block custom_body %}
+<div class="ui-body">
+
+<!-- linuxcnc availability indication --->
+  <div id="cnc_availability"> 
+    <span>LinuxCNC не запущен</span> 
+    <button id="but_restart_cnc">Запустить</button>
+  </div>
+
+<!-- tool table editor window --->
+  <div class="tool_table_wrap"> 
+
+    <div id="tool_table_window">
+
+      <div id="tool_table_editor">
+        <table id="tool_table" border="1">
+          <thead id="tool_table_header">
+            <!-- Created with js --->
+          </thead>
+
+          <tbody id="tool_table_body">
+            <!-- Created with js --->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tool_table_controls">
+        <button id="but_tool_delete">Удалить</button>
+        <button id="but_tool_add">Добавить</button>
+        <button id="but_tool_reread">Перечитать</button>
+        <button id="but_tool_save">Сохранить</button>
+        <button id="but_tool_reload">Перезагрузить</button>
+        <button id="but_tool_close">Выйти</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="bar_control">
+    <button id="but_estop" class="css-button" title="Аварийная остановка">
+      ESTOP
+    </button>
+
+    <button id="but_power" class="css-button" title="Питание станка">
+      POWER
+    </button>
+
+    <button id="but_tool_edit_open" class="css-button" title="Таблица инструментов">ToolEditor</button>
+  </div>
+
+  <div class="control_bars_switcher">
+    <button id="but_manual_control">Ручное управление</button>
+    <button id="but_mdi_control">MDI</button>
+  </div>
+
+  <div id="bar_manual_control">
+
+    <div class="axis_selection_block">
+      <span class="axis_step_name">Ось</span>
+      <input id="X_axis_move" class="navi-radio" name="active_axis" type="radio" value=0 checked><span class="X_axis_name">X</span>
+      <input id="Y_axis_move" class="navi-radio" name="active_axis" type="radio" value=1><span class="Y_axis_name">Y</span>
+      <input id="Z_axis_move" class="navi-radio" name="active_axis" type="radio" value=2><span class="Z_axis_name">Z</span>
+    </div>
+    
+    <div class="axis_step_block">
+      <span class="axis_selection_name">Шаг</span>
+      <select id="axis_step" >
+        <option>Постоянный</option>
+        <option>0.1 мм</option>
+        <option>1 мм</option>
+        <option>10 мм</option>
+      </select>
+    </div>
+
+    <div class="axis_move_speed_block">
+      <span class="axis_move_speed_name">Скорость</span>
+      <input id="axis_move_speed" class="navi-range" type="range" min="0" max="100" step="1" value="50"> 
+      <span id="axis_move_speed_value">N/A</span>
+      <script>
+        
+      </script>
+    </div>
+
+    <div class="axis_control_block">
+      <span class="axis_control_name">Перемещение</span>
+      <button id="but_axis_move_neg" class="navi-btn navi-btn-text">
+        -
+      </button>
+      <button id="but_axis_move_pos" class="navi-btn navi-btn-text">
+        +
+      </button>
+    </div>
+
+    <button id="but_home" class="navi-btn navi-btn-text" title="Вернуть все оси в начало" >
+      HOME
+    </button>
+
+  </div>
+
+  <div id="bar_mdi_control">
+    <div class="mdi_journal_block">
+      <div class="mdi_block_title">Журнал команд:</div>
+      <textarea id="mdi_journal"></textarea>
+    </div>
+    
+    <div class="mdi_cmd_line_block">
+      <div class="mdi_block_title">Команда MDI:</div>
+      <input id="mdi_cmd_line">
+      <button id="but_mdi_run">Исполнить</button>
+    </div>
+    <!--
+    <div class="mdi_active_codes_block">
+      <span class="mdi_block_title">Активные G-коды:</span>
+      <textarea id="mdi_active_codes" readonly></textarea>
+    </div>
+    -->
+  </div>
+
+  <div class="gcode_bar_block">
+
+    <div class="gcode_menu">
+
+      <div class="gcode_open">
+        <!---<label for="ngc_file_open"></label> --->
+        <input type="file" id="ngc_file_open" name="ngc_file_open" accept="*.ngc">
+      </div>
+
+      <div id="gcode_control" class="gcode_control">
+        <button id="gcode_start" class="navi-btn navi-btn-text" disabled>Start</button>
+        <button id="gcode_step" class="navi-btn navi-btn-text" disabled>Step</button>
+        <button id="gcode_pause" class="navi-btn navi-btn-text" disabled>Pause</button>
+        <button id="gcode_stop" class="navi-btn navi-btn-text" disabled>Stop</button>
+      </div>
+      
+    </div>
+
+    <div class="gcode_line">
+      <span>Line:</span><span id="gcode_line_value">0</span>
+    </div>
+
+    <div class="gcode_content">
+      <textarea id="ngc_file_content" readonly></textarea>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="canvas_3d_block"> 
+
+    <div class="axis_position_values">
+      <div class="axis_value_name">
+        <span id="X_homed">H </span>
+        <span class="axis_value_text">X: </span>
+        <span id="X_axis_value">-</span></div><br>
+      <div class="axis_value_name">
+        <span id="Y_homed">H </span>
+        <span class="axis_value_text"> Y: </span>
+        <span id="Y_axis_value">-</span></div><br>
+      <div class="axis_value_name">
+        <span id="Z_homed">H </span>
+        <span class="axis_value_text"> Z: </span>
+        <span id="Z_axis_value">-</span></div>
+    </div>
+
+    <button id="clear_traj_but">Очистить</button>
+
+    <div id="canvas-3d" class="bar_canvas_3d">
+
+      
+    </div>
+
+  </div>
+
+
+  <div class="status_bar">
+    <span>Состояние:</span><span id="cnc_state_value">-</span>
+    <span>Инструмент:</span><span id="cnc_tool_value">-</span>
+    <span>G-code:</span><span id="cnc_file_value">-</span>
+    <span></span>
+  </div>
+
+</div>
+{% end %}

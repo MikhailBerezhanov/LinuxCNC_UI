@@ -1,0 +1,47 @@
+
+# view active modules search paths
+python -c "import sys, pprint; pprint.pprint(sys.path)"
+
+# linuxcnc libs
+-----------------------------
+/usr/lib/pymodules/python2.7
+/usr/lib/pyshared/python2.7
+/usr/lib/python2.7/dist-packages/
+----------------------------
+
+# Python2.7.18 dependencies
+sudo apt-get install curl graphviz-dev libsqlite3-dev libbz2-dev libreadline-dev libgdbm-dev libdb-dev tk-dev libncurses-dev
+
+# gnome warning fix
+sudo nano /etc/xdg/autostart/gnome-keyring-pkcs11.desktop
+-> XFCE;
+
+# Python install NOTE: '/usr/local/bin'  is before '/usr/bin' in env $PATH, so we remove symlink '/usr/local/bin/python'
+# to make system python work
+wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
+tar xf Python-2.7.18.tar.xz
+cd Python-2.7.18/
+./configure --enable-optimizations
+make
+make install
+rm -f /usr/local/bin/python
+
+# After this we have two python versions installed in the system:
+$ python --version
+$ python2.7 --version
+
+# New pip install
+curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+nano get-pip.py
+[change] !/usr/bin/env python -> !/usr/bin/env python2.7
+python2.7 get-pip.py
+# Use like two python versions:
+$ pip --version
+$ pip2.7 --version
+
+# Make linuxcnc libs available from new python2.7
+nano ~/.bashrc
+[ add ] export PYTHONPATH=$PYTHONPATH:/usr/lib/pymodules/python2.7:/usr/lib/pyshared/python2.7
+
+# Install LinuxCnc_UI dependencies
+pip2.7 install tornado logging pyautogui configparser 

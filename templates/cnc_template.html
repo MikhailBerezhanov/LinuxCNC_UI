@@ -1,0 +1,25 @@
+
+{% set ui_version = '1.1' %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LinuxCNC {{ serv_version }} {{ ui_version }}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="ru">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="refresh" content="">
+    <meta name="description" content="LinuxCNC_UI">   
+    <link rel="shortcut icon" sizes="72x72" href="static/img/favicon.ico" type="image/x-icon">
+
+    {% block custom_header %}{% end %}
+
+  </head>
+
+  <body>
+
+    {% block custom_body %}{% end %}
+
+  </body>
+</html>
+

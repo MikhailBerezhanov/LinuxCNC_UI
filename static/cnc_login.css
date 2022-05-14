@@ -1,0 +1,112 @@
+
+.header-startup{
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 60px;
+  color: #fff;
+
+  z-index: 3;
+  position: absolute;
+  top: 11%;
+}
+
+/*------------------------------------------------------------------
+[ login ]*/
+.wrap-login {
+  width: 430px;  
+  border-radius: 20px;
+  overflow: hidden;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: transparent;
+  position: relative;
+
+  justify-content: center;
+  align-items: center;
+}
+
+/*------------------------------------------------------------------
+[ Form ]*/
+.login-form {
+  width: 100%;
+  border-radius: 0px 0px 10px 10px;
+  padding-top: 5px;
+  padding-bottom: 33px;
+
+  background-color: var(--mainmenu-btn-color);
+}
+
+.login-form-title {
+  text-align: center;
+  display: block;
+  border-radius: 10px 10px 0px 0px;
+  padding-top: 43px;
+  padding-bottom: 33px;
+  background-color: var(--cell-title-color);
+  /*border-bottom: 2px solid #3e6c1b;*/
+}
+
+/*------------------------------------------------------------------
+[ Input ]*/
+.wrap-input {
+  width: 100%;
+  position: relative;
+  border-bottom: 1.5px solid #000000;
+  padding: 29px 0;
+}
+
+.input {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  line-height: 1.2;
+
+  display: block;
+  width: 100%;
+  height: 25px;
+  background: transparent;
+  /*padding: 0 10px 0 20px;*/
+  text-align: center;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.input::-webkit-input-placeholder {
+  font-size: 20px;
+}
+
+.input::-moz-placeholder {
+  font-size: 20px;
+}
+
+.input:-ms-input-placeholder {
+  font-size: 20px;
+}
+
+.input::placeholder {
+  font-size: 20px;
+}
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-login-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.login-form-btn {
+  padding: 0 20px;
+  min-width: 160px;
+  height: 42px;
+
+  position: relative;
+  z-index: 1;
+}
